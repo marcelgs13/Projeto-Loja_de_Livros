@@ -1,0 +1,169 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+
+title Diagrama de Classes - Loja de Livros (Arquitetura em Camadas-MVC)
+
+' ======= PACKAGES =======
+package modelo {
+    class Livro {
+        - id : int
+        - titulo : String
+        - autor : String
+        - isbn : String
+        - editora : String
+        - edicao : int
+        - preco : double
+        - quantidadeEstoque : int
+        - estoqueMinimo : int
+        + estaAbaixoEstoqueMinimo() : boolean
+        + getters/setters
+    }
+
+    class Cliente {
+        - id : int
+        - nome : String
+        - cpf : String
+        - email : String
+        - telefone : String
+        + getters/setters
+    }
+
+    class ItemVenda {
+        - id : int
+        - livro : Livro
+        - quantidade : int
+        - precoUnitario : double
+        + calcularSubtotal() : double
+        + getters/setters
+    }
+
+    class Venda {
+        - id : int
+        - cliente : Cliente
+        - itens : List<ItemVenda>
+        - dataVenda : LocalDate
+        + adicionarItem(ItemVenda)
+        + calcularTotal() : double
+        + gerarFatura() : String
+        + getters/setters
+    }
+}
+
+package persistencia {
+    interface Base<T> {
+        + inserir(T)
+        + modificar(T)
+        + apagar(int id)
+        + consultar(int id) : T
+        + listar() : List<T>
+    }
+
+    abstract class PersistenciaSerializacao<T> {
+        # dados : List<T>
+        # nomeArquivo : String
+        # salvarDados()
+        # carregarDados() : List<T>
+    }
+
+    class LivroBase {
+        + buscarPorTitulo(String) : List<Livro>
+    }
+
+    class ClienteBase {
+        + consultarPorCpf(String) : Cliente
+    }
+
+    class VendaBase {
+        + listarPorData(LocalDate) : List<Venda>
+    }
+}
+
+package negocio {
+    class ServicoLivro {
+        - dao : LivroBase
+        + inserir(Livro)
+        + modificar(Livro)
+        + apagar(int id)
+        + consultar(int id) : Livro
+        + listar() : List<Livro>
+        + listarLivrosAbaixoEstoqueMinimo() : List<Livro>
+    }
+
+    class ServicoCliente {
+        - dao : ClienteBase
+        + inserir(Cliente)
+        + modificar(Cliente)
+        + apagar(int id)
+        + consultar(int id) : Cliente
+        + listar() : List<Cliente>
+    }
+
+    class ServicoVenda {
+        - dao : VendaBase
+        - servicoLivro : ServicoLivro
+        + registrarVenda(Venda) : String
+        + calcularTotalVendasMes(int, int) : double
+        + produtoMaisVendido() : Livro
+        + produtoMenosVendido() : Livro
+        + melhorCliente() : String
+        + diaComMaisVendas() : LocalDate
+    }
+
+    class UtilitarioArquivo {
+        + {static} salvarConteudo(String, String) : boolean
+    }
+
+    class UtilitarioPDF {
+        + {static} gerarPDFDeMarkdown(String, String) : boolean
+    }
+}
+
+package apresentacao {
+    class TelaInicial
+    class TelaPrincipal
+    class PainelLivro
+    class PainelCliente
+    class PainelVenda
+    class PainelRelatorios
+}
+
+' ======= RELACIONAMENTOS DE MODELO =======
+Livro "1" <-- "1" ItemVenda : livro
+Venda "1" --> "1..*" ItemVenda : contém
+Venda "1" --> "1" Cliente : cliente
+
+' ======= RELACIONAMENTOS DE PERSISTÊNCIA =======
+DAO <|.. PersistenciaSerializacao
+PersistenciaSerializacao <|-- LivroBase
+PersistenciaSerializacao <|-- ClienteBase
+PersistenciaSerializacao <|-- VendaBase
+
+' ======= RELACIONAMENTOS DE NEGÓCIO =======
+ServicoLivro --> LivroBase
+ServicoCliente --> ClienteBase
+ServicoVenda --> VendaBase
+ServicoVenda --> ServicoLivro : atualiza estoque
+
+' ======= RELACIONAMENTOS DE APRESENTAÇÃO =======
+TelaPrincipal --> TelaInicial : <<retorna>>
+TelaPrincipal --> PainelLivro
+TelaPrincipal --> PainelCliente
+TelaPrincipal --> PainelVenda
+TelaPrincipal --> PainelRelatorios
+
+TelaInicial --> ServicoLivro
+TelaInicial --> ServicoCliente
+TelaInicial --> ServicoVenda
+
+PainelLivro --> ServicoLivro
+PainelCliente --> ServicoCliente
+PainelVenda --> ServicoLivro
+PainelVenda --> ServicoCliente
+PainelVenda --> ServicoVenda
+PainelVenda --> UtilitarioArquivo
+PainelVenda --> UtilitarioPDF
+
+PainelRelatorios --> ServicoVenda
+
+@enduml
