@@ -114,9 +114,7 @@ package negocio {
         + {static} salvarConteudo(String, String) : boolean
     }
 
-    class UtilitarioPDF {
-        + {static} gerarPDFDeMarkdown(String, String) : boolean
-    }
+    
 }
 
 package apresentacao {
@@ -162,7 +160,7 @@ PainelVenda --> ServicoLivro
 PainelVenda --> ServicoCliente
 PainelVenda --> ServicoVenda
 PainelVenda --> UtilitarioArquivo
-PainelVenda --> UtilitarioPDF
+
 
 PainelRelatorios --> ServicoVenda
 
