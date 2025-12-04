@@ -23,7 +23,7 @@ O sistema oferece as seguintes funcionalidades de gestão:
 | **Gestão de Livros** | CRUD (Cadastro, Consulta, Atualização, Exclusão) completo. |
 | **Gestão de Clientes** | CRUD (Cadastro, Consulta, Atualização, Exclusão) de clientes. |
 | **Gestão de Vendas** | Registro de vendas, cálculo de total e atualização automática de estoque. |
-| **Faturamento** | Emissão de fatura por venda e geração automática em arquivo PDF. |
+| **Faturamento** | Emissão de fatura por venda e geração automática em arquivo TXT. |
 | **Controle de Estoque** | Alerta visual e funcional quando o estoque de um livro atinge o nível mínimo definido. |
 | **Relatórios de Gestão** | Total de vendas por período, produto mais/menos vendido, melhor cliente e dia de maior venda. |
 
