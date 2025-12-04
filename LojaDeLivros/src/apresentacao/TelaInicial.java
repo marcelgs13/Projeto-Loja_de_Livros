@@ -44,7 +44,6 @@ public class TelaInicial extends JFrame {
         gbc.gridy = 2;
         add(btnSair, gbc);
 
-        // Listeners
         btnIniciar.addActionListener(e -> iniciarAplicacao());
         btnSair.addActionListener(e -> System.exit(0));
     }
@@ -52,7 +51,7 @@ public class TelaInicial extends JFrame {
     private void iniciarAplicacao() {
         // Fecha a tela inicial
         this.dispose();
-        // Abre a tela principal (que agora é a tela de abas)
+        // Abre a tela principal do sistema
         new TelaPrincipal(this, servicoLivro, servicoCliente, servicoVenda).setVisible(true);
     }
 }

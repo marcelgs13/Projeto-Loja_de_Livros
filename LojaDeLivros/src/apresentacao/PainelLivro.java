@@ -28,7 +28,7 @@ public class PainelLivro extends JPanel {
         this.servicoLivro = servicoLivro;
         setLayout(new BorderLayout());
 
-        // --- Painel de Formulário (Norte) ---
+        // --- Painel de Formulário ---
         JPanel painelFormulario = new JPanel(new GridLayout(5, 4, 10, 10));
         painelFormulario.setBorder(BorderFactory.createTitledBorder("Dados do Livro"));
 
@@ -62,7 +62,6 @@ public class PainelLivro extends JPanel {
         painelFormulario.add(new JLabel("Estoque Mínimo:"));
         painelFormulario.add(campoEstoqueMinimo);
 
-        // --- Painel de Botões (Centro) ---
         JPanel painelBotoes = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
         JButton btnInserir = new JButton("Inserir");
         JButton btnModificar = new JButton("Modificar");
@@ -76,13 +75,12 @@ public class PainelLivro extends JPanel {
         painelBotoes.add(btnConsultar);
         painelBotoes.add(btnLimpar);
 
-        // --- Tabela de Livros (Sul) ---
+        // --- Tabela de Livros ---
         String[] colunas = {"ID", "Título", "Autor", "ISBN", "Preço", "Estoque", "Estoque Mínimo"};
         modeloTabela = new DefaultTableModel(colunas, 0);
         tabelaLivros = new JTable(modeloTabela);
         JScrollPane scrollPane = new JScrollPane(tabelaLivros);
 
-        // Adiciona os painéis ao PainelLivro
         JPanel painelSuperior = new JPanel(new BorderLayout());
         painelSuperior.add(painelFormulario, BorderLayout.NORTH);
         painelSuperior.add(painelBotoes, BorderLayout.CENTER);
@@ -90,10 +88,8 @@ public class PainelLivro extends JPanel {
         add(painelSuperior, BorderLayout.NORTH);
         add(scrollPane, BorderLayout.CENTER);
 
-        // Carrega os dados iniciais
         carregarTabela();
 
-        // --- Listeners ---
         btnInserir.addActionListener(e -> inserirLivro());
         btnModificar.addActionListener(e -> modificarLivro());
         btnApagar.addActionListener(e -> apagarLivro());

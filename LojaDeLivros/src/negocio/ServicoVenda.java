@@ -76,10 +76,6 @@ public class ServicoVenda {
                 .orElse(null);
     }
 
-    /**
-     * MÉTODO ALTERADO
-     * Agora considera livros com 0 vendas consultando o estoque completo.
-     */
     public Livro produtoMenosVendido() {
         // 1. Cria um mapa de ID do Livro -> Quantidade Vendida
         Map<Integer, Integer> vendasPorId = dao.listar().stream()
@@ -90,12 +86,11 @@ public class ServicoVenda {
                 ));
 
         // 2. Busca TODOS os livros do sistema (Estoque)
-        // Nota: Certifique-se que servicoLivro tem o método listar() ou getTodos()
         List<Livro> todosOsLivros = servicoLivro.listar(); 
 
         if (todosOsLivros.isEmpty()) return null;
 
-        // 3. Compara qual livro tem a menor quantidade no mapa (assumindo 0 se não existir)
+        // 3. Compara qual livro tem a menor quantidade no mapa
         return todosOsLivros.stream()
                 .min(Comparator.comparingInt(livro -> vendasPorId.getOrDefault(livro.getId(), 0)))
                 .orElse(null);

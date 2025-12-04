@@ -12,7 +12,6 @@ public class ServicoCliente {
     }
 
     public void inserir(Cliente cliente) {
-        // Regras de negócio (ex: CPF único)
         if (dao.consultarPorCpf(cliente.getCpf()) != null) {
             throw new IllegalArgumentException("Já existe um cliente cadastrado com este CPF.");
         }

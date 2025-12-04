@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.YearMonth;
+//import java.time.YearMonth;
 
 public class PainelRelatorios extends JPanel {
     private ServicoVenda servicoVenda;
@@ -20,7 +20,7 @@ public class PainelRelatorios extends JPanel {
         setLayout(new BorderLayout(10, 10));
         setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-        // --- Painel de Controle (Norte) ---
+        // --- Painel de Controle ---
         JPanel painelControle = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JButton btnGerarRelatorios = new JButton("Gerar Relatórios");
 
@@ -39,7 +39,7 @@ public class PainelRelatorios extends JPanel {
         painelControle.add(comboAno);
         painelControle.add(btnGerarRelatorios);
 
-        // --- Área de Texto para Relatórios (Centro) ---
+        // --- Área de TXT para Relatórios ---
         areaRelatorios = new JTextArea();
         areaRelatorios.setEditable(false);
         areaRelatorios.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 14));
@@ -48,7 +48,6 @@ public class PainelRelatorios extends JPanel {
         add(painelControle, BorderLayout.NORTH);
         add(scrollPane, BorderLayout.CENTER);
 
-        // --- Listener ---
         btnGerarRelatorios.addActionListener(e -> gerarRelatorios());
     }
 

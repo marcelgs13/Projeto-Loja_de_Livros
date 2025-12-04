@@ -96,7 +96,6 @@ public class PainelVenda extends JPanel {
         add(scrollPane, BorderLayout.CENTER);
         add(painelInferior, BorderLayout.SOUTH);
 
-        // --- Listeners ---
         btnBuscarCliente.addActionListener(e -> buscarCliente());
         btnAdicionarItem.addActionListener(e -> adicionarItem());
         btnFinalizarVenda.addActionListener(e -> finalizarVenda());

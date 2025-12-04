@@ -31,7 +31,7 @@ public class TelaPrincipal extends JFrame {
         PainelLivro painelLivro = new PainelLivro(servicoLivro);
         tabbedPane.addTab("Gestão de Livros", painelLivro);
 
-        // 2. Painel de Clientes (CRUD - simplificado)
+        // 2. Painel de Clientes (CRUD)
         PainelCliente painelCliente = new PainelCliente(servicoCliente);
         tabbedPane.addTab("Gestão de Clientes", painelCliente);
 
@@ -39,7 +39,7 @@ public class TelaPrincipal extends JFrame {
         PainelVenda painelVenda = new PainelVenda(servicoLivro, servicoCliente, servicoVenda);
         tabbedPane.addTab("Registro de Vendas", painelVenda);
 
-        // 4. Painel de Relatórios (Consultas de Gestão)
+        // 4. Painel de Relatórios (Consultas de Gestão Vendas)
         PainelRelatorios painelRelatorios = new PainelRelatorios(servicoVenda);
         tabbedPane.addTab("Relatórios de Gestão", painelRelatorios);
 

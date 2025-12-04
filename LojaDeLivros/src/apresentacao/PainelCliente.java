@@ -24,7 +24,7 @@ public class PainelCliente extends JPanel {
         this.servicoCliente = servicoCliente;
         setLayout(new BorderLayout());
 
-        // --- Painel de Formulário (Norte) ---
+        // --- Painel de Formulário ---
         JPanel painelFormulario = new JPanel(new GridLayout(3, 4, 10, 10));
         painelFormulario.setBorder(BorderFactory.createTitledBorder("Dados do Cliente"));
 
@@ -46,7 +46,6 @@ public class PainelCliente extends JPanel {
         painelFormulario.add(new JLabel("Telefone:"));
         painelFormulario.add(campoTelefone);
 
-        // --- Painel de Botões (Centro) ---
         JPanel painelBotoes = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
         JButton btnInserir = new JButton("Inserir");
         JButton btnModificar = new JButton("Modificar");
@@ -58,13 +57,13 @@ public class PainelCliente extends JPanel {
         painelBotoes.add(btnApagar);
         painelBotoes.add(btnLimpar);
 
-        // --- Tabela de Clientes (Sul) ---
+        // --- Tabela de Cliente ---
         String[] colunas = {"ID", "Nome", "CPF", "Email", "Telefone"};
         modeloTabela = new DefaultTableModel(colunas, 0);
         tabelaClientes = new JTable(modeloTabela);
         JScrollPane scrollPane = new JScrollPane(tabelaClientes);
 
-        // Adiciona os painéis ao PainelCliente
+        
         JPanel painelSuperior = new JPanel(new BorderLayout());
         painelSuperior.add(painelFormulario, BorderLayout.NORTH);
         painelSuperior.add(painelBotoes, BorderLayout.CENTER);
@@ -72,10 +71,8 @@ public class PainelCliente extends JPanel {
         add(painelSuperior, BorderLayout.NORTH);
         add(scrollPane, BorderLayout.CENTER);
 
-        // Carrega os dados iniciais
         carregarTabela();
 
-        // --- Listeners ---
         btnInserir.addActionListener(e -> inserirCliente());
         btnModificar.addActionListener(e -> modificarCliente());
         btnApagar.addActionListener(e -> apagarCliente());

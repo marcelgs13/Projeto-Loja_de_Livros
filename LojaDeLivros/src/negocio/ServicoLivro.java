@@ -13,7 +13,6 @@ public class ServicoLivro {
     }
 
     public void inserir(Livro livro) {
-        // Regras de negócio antes de inserir (ex: validação de campos)
         if (livro.getTitulo() == null || livro.getTitulo().trim().isEmpty()) {
             throw new IllegalArgumentException("O título do livro não pode ser vazio.");
         }
@@ -29,7 +28,6 @@ public class ServicoLivro {
     }
 
     public void apagar(int id) {
-        // Regras de negócio antes de apagar (ex: verificar se está em alguma venda)
         dao.apagar(id);
     }
 

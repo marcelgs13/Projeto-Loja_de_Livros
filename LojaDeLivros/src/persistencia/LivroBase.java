@@ -48,7 +48,7 @@ public class LivroBase extends PersistenciaSerializacao<Livro> {
         salvarDados();
     }
 
-    // Método auxiliar para buscar livros por título (necessário para a venda)
+    // Filtro para buscar livros por título (necessário na hora da venda)
     public List<Livro> buscarPorTitulo(String titulo) {
         return dados.stream()
                 .filter(livro -> livro.getTitulo().toLowerCase().contains(titulo.toLowerCase()))

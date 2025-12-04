@@ -46,7 +46,7 @@ public class ClienteBase extends PersistenciaSerializacao<Cliente> {
         salvarDados();
     }
 
-    // Método auxiliar para buscar cliente por CPF
+    // Filtro para buscar cliente por CPF
     public Cliente consultarPorCpf(String cpf) {
         return dados.stream()
                 .filter(cliente -> cliente.getCpf().equals(cpf))
