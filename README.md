@@ -58,7 +58,6 @@ LojaDeLivros/
 *   **Linguagem:** Java (Recomendado JDK 11+ para `Collectors.toList()` ou JDK 8 com a correção aplicada).
 *   **Interface Gráfica:** Java Swing.
 *   **Persistência:** Serialização de Objetos (`java.io`).
-*   **Geração de Documentos:** Geração de PDF via ferramenta de linha de comando (`manus-md-to-pdf`).
 
 ## 🚀 Como Executar o Projeto
 
